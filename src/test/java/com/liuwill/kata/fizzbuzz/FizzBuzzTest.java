@@ -1,3 +1,5 @@
+package com.liuwill.kata.fizzbuzz;
+
 class FizzBuzzTest {
 
     void testBasic() {

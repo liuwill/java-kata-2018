@@ -4,5 +4,9 @@ build
 output
 out
 *.iml
-*.ipr	
+*.ipr
 *.iws
+.classpath
+.project
+.settings
+bin
