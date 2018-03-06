@@ -101,4 +101,92 @@ junitPlatform {
     // filters (optional)
 }
 
+// [ FindBugs Start**/
+findbugs{
+    ignoreFailures=true
+    findbugsTest.enabled=false
+}
 
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+// ] FindBugs End**/
+checkstyle{
+    toolVersion = '7.8.2'
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+        // html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
+    }
+    configFile = file('config/checkstyle/checkstyle.xml')
+}
+
+jacoco{
+    toolVersion = "0.7.9"
+    // reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports{
+        xml.enabled = true
+        html.enabled = true
+
+        // html.destination = "${buildDir}/jacocoHtml"
+    }
+}
+
+task parseCoverageSummary(dependsOn: jacocoTestReport) {
+  group = 'ci'
+  doLast {
+    def testReportFile = file("${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+
+    def xmlParser = new XmlParser()
+    xmlParser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+    xmlParser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+    def reportDom = xmlParser.parse(testReportFile)
+    def coverdInstruct = Integer.parseInt(reportDom.counter[0].@covered)
+    def missedInstruct = Integer.parseInt(reportDom.counter[0].@missed)
+
+    def coverageRate = Math.round(coverdInstruct * 10000 / (coverdInstruct + missedInstruct)) / 100
+    println ''
+    println '=========== Coverage summary ==========='
+    println "${project.name} :  ${coverageRate}%"
+    println ''
+
+    reportDom.counter.each { counterData ->
+      def coverdInstructLine = Integer.parseInt(counterData.@covered)
+      def missedInstructLine = Integer.parseInt(counterData.@missed)
+      def totalLine = coverdInstructLine + missedInstructLine
+
+      def coverageRateLine = Math.round(coverdInstructLine * 10000 / (coverdInstructLine + missedInstructLine)) / 100
+      println "${counterData.@type} :  ${coverageRateLine}%  (${coverdInstructLine}/${totalLine})"
+    }
+    println '========================================'
+  }
+}
+
+task codeCoverageReport(type: JacocoReport) {
+  executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+  subprojects.each {
+    sourceSets it.sourceSets.main
+  }
+
+  reports {
+    xml.enabled true
+    xml.setDestination(file("${buildDir}/reports/jacoco/report.xml"))
+    // xml.destination "${buildDir}/reports/jacoco/report.xml"
+    html.enabled false
+    csv.enabled false
+  }
+}
+
+codeCoverageReport.dependsOn {
+  subprojects*.test
+}
