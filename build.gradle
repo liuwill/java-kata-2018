@@ -78,7 +78,6 @@ task createJavaProject {
     }
 }
 
-
 junitPlatform {
     platformVersion '1.0.1'
     filters {
@@ -127,8 +126,11 @@ tasks.withType(Checkstyle) {
     configFile = file('config/checkstyle/checkstyle.xml')
 }
 
+junitPlatform.enableStandardTestTask true
+
 jacoco{
     toolVersion = "0.7.9"
+    applyTo junitPlatformTest
     // reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
