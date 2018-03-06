@@ -1,0 +1,7 @@
+version: '3'
+services:
+  runner:
+    image: "gradle:4.6-jdk9"
+    volumes:
+      - ./:/var/www
+
