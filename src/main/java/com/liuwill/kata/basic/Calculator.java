@@ -1,4 +1,4 @@
-package com.liuwll.kata.basic;
+package com.liuwill.kata.basic;
 
 public class Calculator {
 
