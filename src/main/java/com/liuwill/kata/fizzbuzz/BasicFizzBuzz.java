@@ -8,9 +8,9 @@ package com.liuwill.kata.fizzbuzz;
  * @date 2018/3/8
  * @desc
  */
-public class BasicFizzBuzz {
+public class BasicFizzBuzz implements FizzBuzzTranslator{
 
-    public static String answer(Integer i) {
+    public String answer(Integer i) {
         StringBuilder result = new StringBuilder();
         if (FizzBuzzUtils.isFizz(i)) {
             result.append("fizz");

@@ -12,15 +12,19 @@ class FizzBuzzTest {
     @Test
     @DisplayName("fizz buzz and 😎")
     void testBasic() {
-        String answer = BasicFizzBuzz.answer(1);
-        String answerFizz = BasicFizzBuzz.answer(3);
-        String answerBuzz = BasicFizzBuzz.answer(5);
-        String answerFizzBuzz = BasicFizzBuzz.answer(15);
-
-        assertEquals("1", answer);
-        assertEquals("fizz", answerFizz);
-        assertEquals("buzz", answerBuzz);
-        assertEquals("fizzbuzz", answerFizzBuzz);
+        FizzBuzzTranslator basicTranslator = new BasicFizzBuzz();
+        for (int i = 0; i < 20; i++) {
+            String answer = basicTranslator.answer(i);
+            if (FizzBuzzUtils.isFizzBuzz(i)) {
+                assertEquals("fizzbuzz", answer);
+            } else if (FizzBuzzUtils.isFizz(i)) {
+                assertEquals("fizz", answer);
+            } else if (FizzBuzzUtils.isBuzz(i)) {
+                assertEquals("buzz", answer);
+            } else {
+                assertEquals(new Integer(i).toString(), answer);
+            }
+        }
         System.out.println("just test");
     }
 
