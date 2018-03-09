@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("fast")
 class FizzBuzzTest {
@@ -22,10 +24,25 @@ class FizzBuzzTest {
             } else if (FizzBuzzUtils.isBuzz(i)) {
                 assertEquals("buzz", answer);
             } else {
-                assertEquals(new Integer(i).toString(), answer);
+                assertEquals(Integer.toString(i), answer);
             }
         }
+
         System.out.println("just test");
     }
 
+    @Test
+    @DisplayName("we should check utils")
+    void testUtils () {
+        assertTrue(FizzBuzzUtils.isFizz(0));
+        assertTrue(FizzBuzzUtils.isBuzz(0));
+        assertTrue(FizzBuzzUtils.isFizzBuzz(0));
+    }
+
+    @Test
+    @DisplayName("translator could be verified")
+    void testTranslator() {
+        FizzBuzzTranslator basicTranslator = new BasicFizzBuzz();
+        assertTrue(FizzBuzzUtils.verifyTranslator(basicTranslator));
+    }
 }
