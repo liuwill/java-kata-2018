@@ -1,0 +1,14 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+before_script:
+  # Change Gradle wrapper permissions
+  - chmod +x gradlew
+
+script:
+  - ./gradlew clean build --info
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls
