@@ -187,6 +187,10 @@ task parseCoverageSummary(dependsOn: jacocoTestReport) {
 task codeCoverageReport(type: JacocoReport) {
   executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
+  sourceSets sourceSets.main
+  sourceDirectories = files(project.sourceSets.main.allSource.srcDirs)
+  classDirectories = files(project.sourceSets.main.output)
+
   subprojects.each {
     sourceSets it.sourceSets.main
   }
