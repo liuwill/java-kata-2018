@@ -8,7 +8,8 @@ before_script:
   - chmod +x gradlew
 
 script:
-  - ./gradlew clean build --info
+  - ./gradlew clean check --info
+  - ./gradlew codeCoverageReport
 
 after_success:
-  - ./gradlew jacocoTestReport coveralls
+  - bash <(curl -s https://codecov.io/bash)
