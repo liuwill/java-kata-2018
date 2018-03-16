@@ -24,23 +24,24 @@ class FizzBuzzUtils {
     static boolean verifyTranslator(FizzBuzzTranslator translator) {
         for (int i = 0; i < 20; i++) {
             String answer = translator.answer(i);
-            if (isFizzBuzz(i)) {
-                if (!"fizzbuzz".equals(answer)) {
-                    return false;
-                }
-            } else if (isFizz(i)) {
-                if (!"fizz".equals(answer)){
-                    return false;
-                }
-            } else if (isBuzz(i)) {
-                if (!"buzz".equals(answer)){
-                    return false;
-                }
-            } else if (!Integer.toString(i).equals(answer)) {
+            if (!isRightAnswer(i, answer)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private static boolean isRightAnswer (Integer question, String answer) {
+        if (isFizzBuzz(question) && "fizzbuzz".equals(answer)) {
+            return true;
+        } else if (isFizz(question) && "fizz".equals(answer)) {
+            return true;
+        } else if (isBuzz(question) && "buzz".equals(answer)) {
+            return true;
+        }
+
+        return !(isFizzBuzz(question) || isFizz(question) || isBuzz(question)) && Integer.toString(question).equals(answer);
+
     }
 }
