@@ -33,15 +33,31 @@ class FizzBuzzUtils {
     }
 
     private static boolean isRightAnswer (Integer question, String answer) {
-        if (isFizzBuzz(question) && "fizzbuzz".equals(answer)) {
+        if (isFizzBuzzAnswer(question, answer)) {
             return true;
-        } else if (isFizz(question) && "fizz".equals(answer)) {
+        } else if (isFizzAnswer(question, answer)) {
             return true;
-        } else if (isBuzz(question) && "buzz".equals(answer)) {
+        } else if (isBuzzAnswer(question, answer)) {
             return true;
         }
 
-        return !(isFizzBuzz(question) || isFizz(question) || isBuzz(question)) && Integer.toString(question).equals(answer);
+        return isPlainAnswer(question, answer);
 
+    }
+
+    private static boolean isFizzBuzzAnswer (Integer question, String answer) {
+        return isFizzBuzz(question) && "fizzbuzz".equals(answer);
+    }
+
+    private static boolean isFizzAnswer (Integer question, String answer) {
+        return isFizz(question) && "fizz".equals(answer);
+    }
+
+    private static boolean isBuzzAnswer (Integer question, String answer) {
+        return isBuzz(question) && "buzz".equals(answer);
+    }
+
+    private static boolean isPlainAnswer (Integer question, String answer) {
+        return !(isFizzBuzz(question) || isFizz(question) || isBuzz(question)) && Integer.toString(question).equals(answer);
     }
 }
