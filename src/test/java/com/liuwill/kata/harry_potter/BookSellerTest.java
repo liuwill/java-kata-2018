@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Created by Liu Will - liuwill@live.com on 2018/3/17.
@@ -34,5 +36,22 @@ public class BookSellerTest {
         assertEquals(30, bookSeller.calculatePayPriceByTypes(5));
         assertEquals(8, bookSeller.calculatePayPriceByTypes(1));
         assertEquals(15.2, bookSeller.calculatePayPriceByTypes(2));
+    }
+
+    @Test
+    @DisplayName("we can generate book order")
+    void testGenerateBookOrder () {
+        int first = 1;
+        int second = 2;
+        int third = 3;
+        int forth = 4;
+        int fifth = 0;
+
+        BookOrder bookOrder = BookSeller.generateHarryPotterBookOrder(first, second, third, forth, fifth);
+        String printContent = bookOrder.toString();
+
+        assertTrue(printContent.contains(first + " copies of the first book"));
+        assertTrue(printContent.contains(third + " copies of the third book"));
+        assertFalse(printContent.contains(fifth + " copies of the fifth book"));
     }
 }

@@ -36,4 +36,14 @@ class BookSeller {
 
         return BOOK_PRICE * (1 - discount) * i;
     }
+
+    static BookOrder generateHarryPotterBookOrder(int first, int second, int third, int forth, int fifth) {
+        BookOrder bookOrder = new BookOrder();
+        bookOrder.putSku(new BookSku("first", first));
+        bookOrder.putSku(new BookSku("second", second));
+        bookOrder.putSku(new BookSku("third", third));
+        bookOrder.putSku(new BookSku("forth", forth));
+        bookOrder.putSku(new BookSku("fifth", fifth));
+        return bookOrder;
+    }
 }
