@@ -12,6 +12,11 @@ public class BookSku {
     private String skuId;
     private int number;
 
+    public BookSku() {
+        this.skuId = "";
+        this.number = 0;
+    }
+
     public BookSku(String skuId, int number) {
         this.skuId = skuId;
         this.number = number;

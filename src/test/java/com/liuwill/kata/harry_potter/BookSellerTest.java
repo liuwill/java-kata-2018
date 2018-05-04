@@ -53,5 +53,13 @@ public class BookSellerTest {
         assertTrue(printContent.contains(first + " copies of the first book"));
         assertTrue(printContent.contains(third + " copies of the third book"));
         assertFalse(printContent.contains(fifth + " copies of the fifth book"));
+
+        BookOrder simpleOrder = new BookOrder();
+        BookSku bookSku = new BookSku();
+        bookSku.setNumber(first);
+        bookSku.setSkuId("book");
+        simpleOrder.putSku(bookSku);
+        simpleOrder.putSku(new BookSku("book", second));
+        assertTrue(simpleOrder.toString().contains((first + second) + " copies of the book book"));
     }
 }
