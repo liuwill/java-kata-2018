@@ -9,6 +9,8 @@ package com.liuwill.kata.fizzbuzz;
  * @desc
  */
 class FizzBuzzUtils {
+    private final static int RANDOM_VALIDATE_TIMES = 20;
+
     static boolean isFizz(Integer i) {
         return i % 3 == 0;
     }
@@ -22,7 +24,7 @@ class FizzBuzzUtils {
     }
 
     static boolean verifyTranslator(FizzBuzzTranslator translator) {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < RANDOM_VALIDATE_TIMES; i++) {
             String answer = translator.answer(i);
             if (!isRightAnswer(i, answer)) {
                 return false;

@@ -1,4 +1,4 @@
-package com.liuwill.kata.harry_potter;
+package com.liuwill.kata.harrypotter;
 
 /**
  * Created by Liu Will - liuwill@live.com on 2018/5/3.

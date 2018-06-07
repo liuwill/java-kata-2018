@@ -1,4 +1,4 @@
-package com.liuwill.kata.harry_potter;
+package com.liuwill.kata.harrypotter;
 
 import java.util.HashMap;
 import java.util.Map;

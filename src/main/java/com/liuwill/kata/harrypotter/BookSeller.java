@@ -1,6 +1,6 @@
-package com.liuwill.kata.harry_potter;
+package com.liuwill.kata.harrypotter;
 
-import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * Created by Liu Will - liuwill@live.com on 2018/3/17.
@@ -10,21 +10,25 @@ import java.math.BigDecimal;
  * @date 2018/3/17
  * @desc
  */
-class BookSeller {
-    public static  final double BOOK_PRICE = 8;
+final class BookSeller {
+    public static final double BOOK_PRICE = 8;
+    public static final int TOP_AWARD_BUY_NUMBER = 5;
+    public static final int SECONDARY_AWARD_BUY_NUMBER = 4;
+    public static final int THIRD_AWARD_BUY_NUMBER = 3;
+    public static final int LAST_AWARD_BUY_NUMBER = 2;
 
     static BookSeller open() {
         return new BookSeller();
     }
 
     double calculateDiscountByTypes(int i) {
-        if (i == 5) {
+        if (i == TOP_AWARD_BUY_NUMBER) {
             return 0.25;
-        } else if (i == 4) {
+        } else if (i == SECONDARY_AWARD_BUY_NUMBER) {
             return 0.2;
-        } else if (i == 3) {
+        } else if (i == THIRD_AWARD_BUY_NUMBER) {
             return 0.1;
-        } else if (i == 2) {
+        } else if (i == LAST_AWARD_BUY_NUMBER) {
             return 0.05;
         }
 
@@ -35,6 +39,25 @@ class BookSeller {
         double discount = calculateDiscountByTypes(i);
 
         return BOOK_PRICE * (1 - discount) * i;
+    }
+
+    boolean hasMoreDiscount(int min) {
+        if (min > 1) {
+            return true;
+        }
+        return false;
+    }
+
+    DiscountGroup generateDiscountGroup(BookOrder bookOrder) {
+        Map<String, BookSku> bookSkuMap = bookOrder.getOrderSkuMap();
+        DiscountGroup bestDiscount = null;
+
+        int target = 5;
+        while (hasMoreDiscount(target)) {
+
+            target++;
+        }
+        return bestDiscount;
     }
 
     static BookOrder generateHarryPotterBookOrder(int first, int second, int third, int forth, int fifth) {

@@ -1,4 +1,4 @@
-package com.liuwill.kata.harry_potter;
+package com.liuwill.kata.harrypotter;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

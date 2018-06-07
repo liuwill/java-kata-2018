@@ -10,6 +10,7 @@ package com.liuwill.kata.fizzbuzz;
  */
 public class BasicFizzBuzz implements FizzBuzzTranslator{
 
+    @Override
     public String answer(Integer i) {
         StringBuilder result = new StringBuilder();
         if (FizzBuzzUtils.isFizz(i)) {

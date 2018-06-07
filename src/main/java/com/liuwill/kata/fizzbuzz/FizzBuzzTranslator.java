@@ -9,5 +9,10 @@ package com.liuwill.kata.fizzbuzz;
  * @desc
  */
 public interface FizzBuzzTranslator {
+    /**
+     * 返回 Fizzz Buzz结果
+     * @param i 输入数字
+     * @return fizzbuzz结果
+     */
     String answer (Integer i);
 }
